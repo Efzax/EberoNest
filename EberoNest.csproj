@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <AssemblyTitle>EberoNest</AssemblyTitle>
+    <Product>EberoNest</Product>
+    <AssemblyName>EberoNest</AssemblyName>
+    <RootNamespace>EberoNest</RootNamespace>
+    <ApplicationIcon>assets\app-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="verification/**/*.cs" />
+    <EmbeddedResource Include="assets\app-icon.ico">
+      <LogicalName>EberoNest.Assets.app-icon.ico</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tray_normal.ico">
+      <LogicalName>EberoNest.Assets.tray_normal.ico</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tray_active.ico">
+      <LogicalName>EberoNest.Assets.tray_active.ico</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\tray_paused.ico">
+      <LogicalName>EberoNest.Assets.tray_paused.ico</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

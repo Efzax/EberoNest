@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>EberoNest.Verification</AssemblyName>
+    <RootNamespace>EberoNest.Verification</RootNamespace>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Organizer.cs" Link="Organizer.cs" />
+    <Compile Include="..\Rules.cs" Link="Rules.cs" />
+    <Compile Include="..\StartupMode.cs" Link="StartupMode.cs" />
+    <Compile Include="..\StartupManager.cs" Link="StartupManager.cs" />
+    <Compile Include="..\SettingsForm.cs" Link="SettingsForm.cs" />
+    <Compile Include="..\RulesListControl.cs" Link="RulesListControl.cs" />
+    <EmbeddedResource Include="..\assets\app-icon.ico">
+      <LogicalName>EberoNest.Assets.app-icon.ico</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

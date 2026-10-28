@@ -1,0 +1,30 @@
+# .NET build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+dist/
+EberoNest-Instalacion/
+*.zip
+release/*.exe
+release/*.msi
+
+# IDE and OS files
+.vs/
+.idea/
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local data, shortcuts, and transient diagnostics
+**/rules.json
+**/rules.json.*
+*.lnk
+*.log
+*.dmp
+*.dump
+*.tmp
+*.bak
+RESULTADO-PRUEBAS.txt
