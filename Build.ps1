@@ -54,7 +54,7 @@ Set-Content -LiteralPath (Join-Path $projectRoot 'RESULTADO-PRUEBAS.txt') -Value
 $packageExe = Join-Path $packageDirectory 'dist\EberoNest.exe'
 New-Item -ItemType Directory -Path (Split-Path -Parent $packageExe) -Force | Out-Null
 Copy-Item -LiteralPath $exePath -Destination $packageExe -Force
-foreach ($fileName in @('Install.ps1','Uninstall.ps1','INSTRUCCIONES-INSTALACION.txt','RESULTADO-PRUEBAS.txt')) {
+foreach ($fileName in @('Install.ps1','Uninstall.ps1','RESULTADO-PRUEBAS.txt')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot $fileName) -Destination $packageDirectory -Force
 }
 $zipPath = Join-Path $projectRoot 'EberoNest-Instalacion.zip'
