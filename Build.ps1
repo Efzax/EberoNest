@@ -36,11 +36,17 @@ $projectXml = [xml](Get-Content -LiteralPath $project -Raw)
 foreach ($propertyName in @('AssemblyName','RootNamespace','Product','AssemblyTitle')) {
     if ($projectXml.Project.PropertyGroup.$propertyName -cne 'EberoNest') { throw "Metadata de producto incorrecta: $propertyName" }
 }
+foreach ($versionProperty in @('Version','InformationalVersion')) {
+    if ($projectXml.Project.PropertyGroup.$versionProperty -cne '1.0.2') { throw "Metadata de versión incorrecta: $versionProperty" }
+}
+foreach ($versionProperty in @('AssemblyVersion','FileVersion')) {
+    if ($projectXml.Project.PropertyGroup.$versionProperty -cne '1.0.2.0') { throw "Metadata de versión incorrecta: $versionProperty" }
+}
 $versionInfo = (Get-Item -LiteralPath $exePath).VersionInfo
-if ($versionInfo.ProductName -cne 'EberoNest' -or [string]::IsNullOrWhiteSpace($versionInfo.ProductVersion)) { throw 'Los metadatos de producto/version del EXE no corresponden a EberoNest.' }
+if ($versionInfo.ProductName -cne 'EberoNest' -or $versionInfo.ProductVersion -notmatch '^1\.0\.2') { throw 'Los metadatos de producto/version del EXE no corresponden a EberoNest v1.0.2.' }
 $exeHash = (Get-FileHash -LiteralPath $exePath -Algorithm SHA256).Hash
 $verificationText = @"
-EberoNest v1.0.0 — Build and verification
+EberoNest v1.0.2 — Build and verification
 
 PASS — Published dist/EberoNest.exe for Windows x64 with warnings treated as errors.
 PASS — Functional verification and UI smoke tests completed.

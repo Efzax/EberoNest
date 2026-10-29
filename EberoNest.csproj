@@ -8,6 +8,10 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <AssemblyTitle>EberoNest</AssemblyTitle>
     <Product>EberoNest</Product>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <InformationalVersion>1.0.2</InformationalVersion>
     <AssemblyName>EberoNest</AssemblyName>
     <RootNamespace>EberoNest</RootNamespace>
     <ApplicationIcon>assets\app-icon.ico</ApplicationIcon>
@@ -16,6 +20,9 @@
     <Compile Remove="verification/**/*.cs" />
     <EmbeddedResource Include="assets\app-icon.ico">
       <LogicalName>EberoNest.Assets.app-icon.ico</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\app-icon.png">
+      <LogicalName>EberoNest.Assets.app-icon.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="assets\tray_normal.ico">
       <LogicalName>EberoNest.Assets.tray_normal.ico</LogicalName>

@@ -2,7 +2,7 @@
 
 **Your downloads, automatically sorted.**
 
-EberoNest is a Windows application by Efzax.
+EberoNest is a Windows application by [Efzax](https://github.com/Efzax). See the [official EberoNest repository](https://github.com/Efzax/EberoNest) for source code and releases.
 
 EberoNest organizes new files in your Downloads folder by extension. It runs in the Windows system tray and lets you configure categories, destination folders, and file extensions. You can organize eligible files already in the Downloads root from the app. Startup with Windows can be enabled or disabled in Settings.
 
@@ -16,15 +16,17 @@ End users do not need to install .NET; the application is published as a self-co
 
 ## Install
 
-Download `EberoNest-Setup.exe` from the project’s GitHub Releases page and run it. Setup installs per-user under `%LOCALAPPDATA%\Programs\EberoNest`, creates a Start Menu shortcut, and enables background startup by default. The startup option can be changed later in Settings.
+Download `EberoNest-Setup.exe` from the [official GitHub Releases page](https://github.com/Efzax/EberoNest/releases) and run it. Setup installs per-user under `%LOCALAPPDATA%\Programs\EberoNest`, creates a Start Menu shortcut, and enables background startup by default. The startup option can be changed later in Settings.
 
 The app’s rules are stored locally at `%LOCALAPPDATA%\EberoNest\rules.json`. During an upgrade, rules from a previous installation are imported when no EberoNest rules file exists. Uninstalling preserves user rules.
 
 ## Privacy and security
 
-EberoNest works locally on your computer. Version 1.0.0 has no telemetry, does not send files or rules to the Internet, and does not execute downloaded files. It watches only the top level of Downloads and moves matching regular files into configured category folders. Unknown extensions, temporary download files, and folders remain in Downloads. Configured destination folders that are Windows reparse points are rejected.
+EberoNest works locally on your computer and has no telemetry or analytics. Starting with version 1.0.1, it can check the latest stable release from the official `Efzax/EberoNest` GitHub repository over HTTPS. Automatic checks run at most once per day after a successful check; users can also check manually from About. The request sends the app name and version in its standard User-Agent, along with normal connection metadata required by GitHub. It does not send the Windows username, file paths, rules, files, Downloads contents, configured extensions, or a device identifier. EberoNest does not download or execute release assets and does not update or install itself. It watches only the top level of Downloads and moves matching regular files into configured category folders. Unknown extensions, temporary download files, and folders remain in Downloads. Configured destination folders that are Windows reparse points are rejected.
 
-Version 1.0.0 is not digitally signed. Windows SmartScreen may show an unknown publisher warning when you run the installer.
+The interface supports Spanish and English. Its language preference is stored separately from rules at `%LOCALAPPDATA%\EberoNest\language.txt`; when no valid preference exists, the Windows display language selects the initial language.
+
+Version 1.0.2 is not digitally signed. Windows SmartScreen may show an unknown publisher warning when you run the installer.
 
 ## Build from source
 

@@ -1,5 +1,5 @@
 #define MyAppName "EberoNest"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.2"
 #define MyAppExeName "EberoNest.exe"
 #define EberoNestPayloadSHA256 GetSHA256OfFile(AddBackslash(SourcePath) + "..\dist\EberoNest.exe")
 
@@ -29,8 +29,8 @@ OutputBaseFilename=EberoNest-Setup
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
-VersionInfoVersion=1.0.0.0
-VersionInfoProductVersion=1.0.0.0
+VersionInfoVersion=1.0.2.0
+VersionInfoProductVersion=1.0.2.0
 VersionInfoProductName=EberoNest
 VersionInfoDescription=EberoNest Setup
 VersionInfoOriginalFileName=EberoNest-Setup.exe
@@ -40,8 +40,8 @@ TimeStampsInUTC=yes
 Source: "..\dist\EberoNest.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{userprograms}\EberoNest\EberoNest.lnk"; Filename: "{app}\EberoNest.exe"; WorkingDir: "{app}"; IconFilename: "{app}\EberoNest.exe"
-Name: "{userstartup}\EberoNest.lnk"; Filename: "{app}\EberoNest.exe"; Parameters: "--background"; WorkingDir: "{app}"; IconFilename: "{app}\EberoNest.exe"
+Name: "{userprograms}\EberoNest\EberoNest"; Filename: "{app}\EberoNest.exe"; WorkingDir: "{app}"; IconFilename: "{app}\EberoNest.exe"
+Name: "{userstartup}\EberoNest"; Filename: "{app}\EberoNest.exe"; Parameters: "--background"; WorkingDir: "{app}"; IconFilename: "{app}\EberoNest.exe"
 
 [Run]
 Filename: "{app}\EberoNest.exe"; Description: "Ejecutar EberoNest"; Flags: postinstall nowait skipifsilent
@@ -171,6 +171,20 @@ begin
     DeleteFile(LinkPath);
 end;
 
+procedure RemoveRecognizedDoubleExtensionShortcuts();
+var
+  LinkPath: string;
+begin
+  LinkPath := ExpandConstant('{userprograms}\EberoNest\EberoNest.lnk.lnk');
+  if LinkMatches(LinkPath, InstalledExe, '') or LinkMatchesCurrentPayload(LinkPath, '') then
+    DeleteFile(LinkPath);
+
+  LinkPath := ExpandConstant('{userstartup}\EberoNest.lnk.lnk');
+  if LinkMatches(LinkPath, InstalledExe, '--background') or
+     LinkMatchesCurrentPayload(LinkPath, '--background') then
+    DeleteFile(LinkPath);
+end;
+
 procedure RemoveLegacyExecutables();
 var
   Path: string;
@@ -188,6 +202,7 @@ procedure CurStepChanged(CurStep: TSetupStep);
 begin
   if CurStep = ssPostInstall then
   begin
+    RemoveRecognizedDoubleExtensionShortcuts();
     RemoveRecognizedLegacyShortcuts();
     RemoveLegacyExecutables();
   end;
@@ -201,6 +216,7 @@ begin
   begin
     LinkPath := ExpandConstant('{userstartup}\EberoNest.lnk');
     if LinkMatches(LinkPath, InstalledExe, '--background') or LinkMatchesCurrentPayload(LinkPath, '--background') then DeleteFile(LinkPath);
+    RemoveRecognizedDoubleExtensionShortcuts();
     RemoveRecognizedLegacyShortcuts();
     RemoveLegacyExecutables();
     LinkPath := ExpandConstant('{userprograms}\EberoNest\EberoNest.lnk');

@@ -43,13 +43,14 @@ internal sealed class RulesListControl : Control
         BackColor = SettingsForm.Canvas;
         ForeColor = Color.FromArgb(236, 238, 242);
         Font = valueFont;
-        AccessibleName = "Reglas de organización";
+        AccessibleName = AppLocalization.Get("settings.heading");
         AccessibleRole = AccessibleRole.List;
         TabStop = true;
         Cursor = Cursors.Hand;
         SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.Selectable, true);
         RecalculateMetrics();
         RebuildLayout();
+        AppLocalization.LanguageChanged += Localization_LanguageChanged;
     }
 
     internal int ItemCount => rules.Count;
@@ -70,7 +71,7 @@ internal sealed class RulesListControl : Control
         hoveredIndex = -1;
         RebuildLayout();
         Invalidate();
-        AccessibleDescription = $"{rules.Count} reglas";
+        AccessibleDescription = AppLocalization.Get("rules.count", rules.Count);
     }
 
     internal void SelectIndex(int index)
@@ -118,11 +119,11 @@ internal sealed class RulesListControl : Control
         int extensionX = folderX + folderColumnWidth;
         using (var headingBrush = new SolidBrush(MutedText))
         {
-            TextRenderer.DrawText(graphics, "Categoría", headingFont,
+            TextRenderer.DrawText(graphics, AppLocalization.Get("rules.category"), headingFont,
                 new Rectangle(categoryX, 0, Math.Max(0, categoryColumnWidth - Scale(12)), headerHeight), headingBrush.Color, SingleLineText);
-            TextRenderer.DrawText(graphics, "Carpeta de destino", headingFont,
+            TextRenderer.DrawText(graphics, AppLocalization.Get("rules.folder"), headingFont,
                 new Rectangle(folderX, 0, Math.Max(0, folderColumnWidth - Scale(12)), headerHeight), headingBrush.Color, SingleLineText);
-            TextRenderer.DrawText(graphics, "Extensiones", headingFont,
+            TextRenderer.DrawText(graphics, AppLocalization.Get("rules.extensions"), headingFont,
                 new Rectangle(extensionX, 0, Math.Max(0, contentWidth - extensionX - contentInset), headerHeight), headingBrush.Color, SingleLineText);
         }
 
@@ -284,11 +285,19 @@ internal sealed class RulesListControl : Control
     {
         if (disposing)
         {
+            AppLocalization.LanguageChanged -= Localization_LanguageChanged;
             headingFont.Dispose();
             valueFont.Dispose();
             chipFont.Dispose();
         }
         base.Dispose(disposing);
+    }
+
+    private void Localization_LanguageChanged(object? sender, EventArgs e)
+    {
+        AccessibleName = AppLocalization.Get("settings.heading");
+        AccessibleDescription = AppLocalization.Get("rules.count", rules.Count);
+        Invalidate();
     }
 
     private int contentViewportHeight => Math.Max(0, ClientSize.Height - headerHeight);

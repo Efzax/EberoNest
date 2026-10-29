@@ -68,7 +68,7 @@ Remove-Item -LiteralPath $smokeSetupDirectory -Recurse -Force
 $setupInfo = (Get-Item -LiteralPath $setupPath).VersionInfo
 $setupProductName = $setupInfo.ProductName.Trim()
 $setupProductVersion = $setupInfo.ProductVersion.Trim()
-if ($setupProductName -cne 'EberoNest' -or $setupProductVersion -notmatch '^1\.0\.0') {
+if ($setupProductName -cne 'EberoNest' -or $setupProductVersion -notmatch '^1\.0\.2') {
     throw "Metadata incorrecta en el Setup: ProductName='$setupProductName', ProductVersion='$setupProductVersion'."
 }
 $exeHash = (Get-FileHash -LiteralPath $exePath -Algorithm SHA256).Hash

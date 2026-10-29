@@ -15,6 +15,8 @@ internal static class Program
             return;
         }
 
+        AppLocalization.Initialize();
+
         using var activationSignal = new EventWaitHandle(
             initialState: false, EventResetMode.AutoReset, InstanceActivationSignal.Name);
 
@@ -22,8 +24,8 @@ internal static class Program
         string downloadsPath = GetDownloadsPath();
         if (!Directory.Exists(downloadsPath))
         {
-            MessageBox.Show($"No se encontró la carpeta de Descargas:\n{downloadsPath}",
-                "EberoNest", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"{AppLocalization.Get("downloads.missing")}\n{downloadsPath}",
+                AppLocalization.Get("app.name"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
